@@ -1,6 +1,21 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+t_stack *fill_stack_a(char *argv[], int i)
+{
+	t_stack *a;
+	t_stack *temp;
+	a = NULL;
+
+	while(argv[i])
+	{
+		temp = ft_stack_new(ft_atoi(argv[i]));
+		ft_stack_add_back(&a, temp);
+		i++;
+	}
+	return (a);
+}
+
 void	fill_with_index(t_stack *a, t_tree_node *root)
 {
 	while (a)
@@ -43,15 +58,21 @@ void	choose_sort(t_stack **a, t_stack **b)
 
 int	main(int argc, char *argv[])
 {
+	int i;
 	t_stack		*a;
 	t_stack		*b;
 	t_tree_node	*root;
 
 	a = NULL;
 	b = NULL;
-	check_args(argv, argc);
-	root = build_binary_tree(argv, argc);
-	a = fill_stack_a(argv, argc);
+	i = 1;
+	if(argc == 2)
+	{
+		i = 0;
+		argv = ft_split(argv[1], ' ');
+	}
+	root = build_binary_tree(argv, i);
+	a = fill_stack_a(argv, i);
 	fill_with_index(a, root);
 	check_if_sorted(a);
 	choose_sort(&a, &b);

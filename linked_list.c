@@ -15,22 +15,6 @@ t_stack *ft_stack_new(int value)
 	return (new_node);
 }
 
-t_stack	*ft_stack_last(t_stack *stack)
-{
-	t_stack	*current;
-
-	if (stack == NULL)
-		return (NULL);
-	current = stack;
-	while (current != NULL)
-	{
-		if (current->next == NULL)
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
-}
-
 void	ft_stack_add_back(t_stack **head, t_stack *new)
 {
 	t_stack	*last;
@@ -44,22 +28,7 @@ void	ft_stack_add_back(t_stack **head, t_stack *new)
 	}
 }
 
-t_stack *fill_stack_a(char *argv[], int argc)
-{
-	int i;
-	t_stack *a;
-	t_stack *temp;
-	a = NULL;
 
-	i = 1;
-	while(i < argc)
-	{
-		temp = ft_stack_new(ft_atoi(argv[i]));
-		ft_stack_add_back(&a, temp);
-		i++;
-	}
-	return (a);
-}
 
 int	ft_stack_size(t_stack *stack)
 {
@@ -74,6 +43,22 @@ int	ft_stack_size(t_stack *stack)
 		count++;
 	}
 	return (count);
+}
+
+t_stack	*ft_stack_last(t_stack *stack)
+{
+	t_stack	*current;
+
+	if (stack == NULL)
+		return (NULL);
+	current = stack;
+	while (current != NULL)
+	{
+		if (current->next == NULL)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
 }
 
 t_stack	*ft_stack_penultime(t_stack *stack)

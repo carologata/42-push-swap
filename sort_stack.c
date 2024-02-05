@@ -226,9 +226,9 @@ void	sort_stack(t_stack **a, t_stack **b)
 		len = ft_stack_size(*b);
 	}
 	move_if_necessary(a);
-	// ft_printf("A\n");
-	// print_stack(*a);
-	// ft_printf("\n\n");
-	// ft_printf("B\n");
-	// print_stack(*b);
+	ft_printf("A\n");
+	print_stack(*a);
+	ft_printf("\n\n");
+	ft_printf("B\n");
+	print_stack(*b);
 }

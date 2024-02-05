@@ -27,9 +27,9 @@ typedef struct s_stack
 
 int						check_is_number(char *arg);
 int						check_if_exist(int number, int *comparison, int index);
-void					check_args(char *argv[], int argc);
+int						check_arg(t_tree_node *root, char *arg);
 
-t_tree_node				*build_binary_tree(char *argv[], int argc);
+t_tree_node				*build_binary_tree(char *argv[], int i);
 void					add_tree_node(t_tree_node **root, int data);
 void					index_tree_node(t_tree_node **root);
 int						binary_tree_search(t_tree_node *root, int data);
@@ -37,7 +37,7 @@ int						binary_tree_search(t_tree_node *root, int data);
 t_stack					*ft_stack_new(int value);
 t_stack					*ft_stack_last(t_stack *stack);
 void					ft_stack_add_back(t_stack **stack, t_stack *new);
-t_stack					*fill_stack_a(char *argv[], int argc);
+t_stack					*fill_stack_a(char *argv[], int i);
 int						ft_stack_size(t_stack *stack);
 t_stack					*ft_stack_penultime(t_stack *stack);
 

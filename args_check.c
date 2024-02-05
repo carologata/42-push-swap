@@ -36,27 +36,21 @@ int	check_if_exist(int number, int *comparison, int index)
 	return (0);
 }
 
-void	check_args(char *argv[], int argc)
+int	check_arg(t_tree_node *root, char *arg)
 {
 	int		i;
 	int		is_number;
 	long	number;
-	int		comparison[argc - 1];
 
-	if(argc < 3)
-		message_exit(5);
 	i = 1;
-	while (i < argc)
-	{
-		is_number = check_is_number(argv[i]);
-		if (is_number == -1)
-			message_exit(1);
-		number = ft_long_atoi(argv[i]);
-		if (number > 2147483647 || number < -2147483648)
-			message_exit(2);
-		comparison[i - 1] = number;
-		if(check_if_exist(number, comparison, (i - 1)) == -1)
-			message_exit(3);
-		i++;
-	}
+	is_number = check_is_number(arg);
+	if (is_number == -1)
+		message_exit(1);
+	number = ft_long_atoi(arg);
+	if (number > 2147483647 || number < -2147483648)
+		message_exit(2);
+	if(binary_tree_search(root, number) != -1)
+		message_exit(3);
+	return (number);
+	i++;
 }

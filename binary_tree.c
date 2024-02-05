@@ -1,61 +1,61 @@
 #include "push_swap.h"
 
-int binary_tree_search(t_tree_node *root, int data)
+int	binary_tree_search(t_tree_node *root, int data)
 {
-	if(root == NULL)
+	if (root == NULL)
 		return (-1);
-	else if(root->data == data)
+	else if (root->data == data)
 		return (root->index);
-	else if(root->data < data)
-		return(binary_tree_search(root->right, data));
-	else
+	else if (root->data < data)
+		return (binary_tree_search(root->right, data));
+	else if (root->data > data)
 		return (binary_tree_search(root->left, data));
+	else
+		return (-1);
 }
 
-void index_tree_node(t_tree_node **root)
+void	index_tree_node(t_tree_node **root)
 {
 	static int index = 1;
 
-	if((*root)->left)
+	if ((*root)->left)
 		index_tree_node(&(*root)->left);
-	if(*root)
+	if (*root)
 	{
 		(*root)->index = index;
 		index++;
 	}
-	if((*root)->right)
+	if ((*root)->right)
 		index_tree_node(&(*root)->right);
 }
 
-void add_tree_node(t_tree_node **root, int data)
-{	
-	if(*root == NULL)
+void	add_tree_node(t_tree_node **root, int data)
+{
+	if (*root == NULL)
 	{
 		*root = malloc(sizeof(t_tree_node));
 		(*root)->data = data;
 		(*root)->right = NULL;
 		(*root)->left = NULL;
 	}
-	else if(data > (*root)->data)
+	else if (data > (*root)->data)
 		add_tree_node(&(*root)->right, data);
-	else if(data < (*root)->data)
+	else if (data < (*root)->data)
 		add_tree_node(&(*root)->left, data);
 }
 
-t_tree_node *build_binary_tree(char *argv[], int argc)
+t_tree_node	*build_binary_tree(char *argv[], int i)
 {
-	int i;
-	int data;
-	t_tree_node *root;
-	root = NULL;
+	int			data;
+	t_tree_node	*root;
 
-	i = 1;
-	while(i < argc)
+	root = NULL;
+	while (argv[i])
 	{
-		data = ft_atoi(argv[i]);
+		data = check_arg(root, argv[i]);
 		add_tree_node(&root, data);
 		i++;
 	}
 	index_tree_node(&root);
-	return(root);
+	return (root);
 }

@@ -78,4 +78,4 @@ test500: all
 	@echo -n "Instructions: "
 	@./push_swap $(ARG) | wc -l
 
-.PHONY: all, clean, fclean, re, libft, test2, test3, test100, test500
+.PHONY: all, clean, fclean, re, libft
