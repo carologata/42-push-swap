@@ -1,5 +1,5 @@
 NAME	:= push_swap
-NAME_BONUS	:=	push_swap_bonus
+NAME_BONUS	:=	checker
 CFLAGS	:= -Wextra -Wall -Werror -g3
 LIBFT	:= ./libft
 
@@ -12,6 +12,11 @@ SRCS	:= $(addprefix ./mandatory/, push_swap.c args_check.c binary_tree.c linked_
 				sort_two_or_three.c sort_stack.c utils.c)
 
 OBJS	:= ${SRCS:.c=.o}
+
+SRCS_BONUS := $(addprefix ./bonus/, args_check_bonus.c binary_tree_bonus.c checker_bonus.c linked_list_bonus.c \
+				move_bonus.c movements_bonus.c utils_bonus.c)
+
+OBJS_BONUS := ${SRCS_BONUS:.c=.o}
 
 all: libft $(NAME)
 

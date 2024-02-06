@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/06 16:21:21 by cogata            #+#    #+#             */
+/*   Updated: 2024/02/06 16:21:26 by cogata           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -24,6 +35,12 @@ typedef struct s_stack
 	int					cost_b;
 	struct s_stack		*next;
 }						t_stack;
+
+typedef struct s_addresses
+{
+	void				*address;
+	void				**ptr_address;
+}						t_addresses;
 
 int						check_is_number(char *arg);
 int						check_arg(t_tree_node *root, char *arg);

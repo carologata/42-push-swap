@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 16:21:05 by cogata            #+#    #+#             */
-/*   Updated: 2024/02/06 16:21:14 by cogata           ###   ########.fr       */
+/*   Created: 2024/02/06 16:25:15 by cogata            #+#    #+#             */
+/*   Updated: 2024/02/06 16:25:17 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 t_stack	*fill_stack_a(char *argv[], int i)
 {
@@ -38,7 +38,27 @@ void	fill_with_index(t_stack *a, t_tree_node *root)
 	}
 }
 
-void	check_if_sorted(t_stack *a)
+void	read_move(t_stack **a, t_stack **b)
+{
+	int		i;
+	char	buffer[4];
+
+	i = 0;
+	while (read(1, &buffer[i], 1) == 1)
+	{
+		if (buffer[i] == '\n')
+		{
+			move(buffer, a, b);
+			i = 0;
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+
+void	check_if_sorted(t_stack *a, t_stack *b)
 {
 	int	i;
 
@@ -46,25 +66,13 @@ void	check_if_sorted(t_stack *a)
 	while (a)
 	{
 		if (a->index != i)
-			return ;
+			message_exit("KO");
 		a = a->next;
 		i++;
 	}
-	exit(EXIT_SUCCESS);
-}
-
-void	choose_sort(t_stack **a, t_stack **b)
-{
-	int	len_a;
-
-	len_a = ft_stack_size(*a);
-	if (len_a == 2)
-		sort_two(a);
-	else if (len_a == 3)
-		sort_three(a);
-	else if (len_a > 3)
-		sort_stack(a, b);
-	exit(EXIT_SUCCESS);
+	if (b)
+		message_exit("KO");
+	message_exit("OK");
 }
 
 int	main(int argc, char *argv[])
@@ -89,7 +97,6 @@ int	main(int argc, char *argv[])
 	root = build_binary_tree(argv, i);
 	a = fill_stack_a(argv, i);
 	fill_with_index(a, root);
-	check_if_sorted(a);
-	choose_sort(&a, &b);
-	return (0);
+	read_move(&a, &b);
+	check_if_sorted(a, b);
 }
