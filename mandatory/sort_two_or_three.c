@@ -1,10 +1,8 @@
 #include "push_swap.h"
-#include <stdio.h>
 
 void	sort_two(t_stack **a)
 {
-	printf("sa\n");
-	swap(a);
+	sa(a);
 }
 
 void	find_big_and_middle(t_stack *a, int *big, int *middle)
@@ -32,8 +30,8 @@ void	find_big_and_middle(t_stack *a, int *big, int *middle)
 
 void	sort_three(t_stack **a)
 {
-	int		big;
-	int		middle;
+	int	big;
+	int	middle;
 
 	find_big_and_middle(*a, &big, &middle);
 	if ((*a)->index == big)

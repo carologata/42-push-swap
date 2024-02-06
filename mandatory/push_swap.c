@@ -1,13 +1,13 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-t_stack *fill_stack_a(char *argv[], int i)
+t_stack	*fill_stack_a(char *argv[], int i)
 {
-	t_stack *a;
-	t_stack *temp;
-	a = NULL;
+	t_stack	*a;
+	t_stack	*temp;
 
-	while(argv[i])
+	a = NULL;
+	while (argv[i])
 	{
 		temp = ft_stack_new(ft_atoi(argv[i]));
 		ft_stack_add_back(&a, temp);
@@ -22,7 +22,7 @@ void	fill_with_index(t_stack *a, t_tree_node *root)
 	{
 		a->index = binary_tree_search(root, a->value);
 		if (a->index == -1)
-			message_exit(4);
+			message_exit("Error");
 		a = a->next;
 	}
 }
@@ -39,7 +39,7 @@ void	check_if_sorted(t_stack *a)
 		a = a->next;
 		i++;
 	}
-	message_exit(4);
+	exit(EXIT_SUCCESS);
 }
 
 void	choose_sort(t_stack **a, t_stack **b)
@@ -58,7 +58,7 @@ void	choose_sort(t_stack **a, t_stack **b)
 
 int	main(int argc, char *argv[])
 {
-	int i;
+	int			i;
 	t_stack		*a;
 	t_stack		*b;
 	t_tree_node	*root;
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[])
 	a = NULL;
 	b = NULL;
 	i = 1;
-	if(argc == 2)
+	if (argc == 2)
 	{
 		i = 0;
 		argv = ft_split(argv[1], ' ');
@@ -76,6 +76,5 @@ int	main(int argc, char *argv[])
 	fill_with_index(a, root);
 	check_if_sorted(a);
 	choose_sort(&a, &b);
-
 	return (0);
 }

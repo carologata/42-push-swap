@@ -3,14 +3,13 @@ NAME_BONUS	:=	push_swap_bonus
 CFLAGS	:= -Wextra -Wall -Werror -g3
 LIBFT	:= ./libft
 
-VPATH	 := mandatory libft
-
 HEADERS	:= -I $(LIBFT)
 LIBS	:= $(LIBFT)/libft.a
 
-SRCS	:= push_swap.c args_check.c binary_tree.c linked_list.c messages.c utils.c \
-			movements.c operations.c sort_two_or_three.c sort_stack.c \
-
+SRCS	:= $(addprefix ./mandatory/, push_swap.c args_check.c binary_tree.c linked_list.c \
+				movements.c operations_push.c operations_reverse.c operations_rotate.c operations_swap.c \
+				cost_calculation.c cost_movement.c target_position.c \
+				sort_two_or_three.c sort_stack.c utils.c)
 
 OBJS	:= ${SRCS:.c=.o}
 
@@ -56,12 +55,6 @@ test3: all
 
 test10: all	
 	$(eval ARG = $(shell shuf -i 0-100 -n 10))
-	./push_swap $(ARG) | ./checker_linux $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test30: all	
-	$(eval ARG = $(shell shuf -i 0-100 -n 30))
 	./push_swap $(ARG) | ./checker_linux $(ARG)
 	@echo -n "Instructions: "
 	@./push_swap $(ARG) | wc -l

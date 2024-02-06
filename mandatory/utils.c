@@ -46,12 +46,8 @@ int	max_abs(int value1, int value2)
 	return (value);
 }
 
-void print_stack(t_stack *stack)
+void	message_exit(char *message)
 {
-	while(stack)
-	{
-		ft_printf("value: %d index: %d\n", stack->value, stack->index);
-		stack = stack->next;
-	}
-	ft_printf("\n");
+	ft_printf("%s\n", message);
+	exit(EXIT_FAILURE);
 }

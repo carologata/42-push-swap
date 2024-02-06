@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_stack *ft_stack_new(int value)
+t_stack	*ft_stack_new(int value)
 {
 	t_stack	*new_node;
 
@@ -27,8 +27,6 @@ void	ft_stack_add_back(t_stack **head, t_stack *new)
 		last->next = new;
 	}
 }
-
-
 
 int	ft_stack_size(t_stack *stack)
 {
@@ -70,7 +68,7 @@ t_stack	*ft_stack_penultime(t_stack *stack)
 	current = stack;
 	while (current != NULL)
 	{
-		if(current->next == NULL)
+		if (current->next == NULL)
 			return (current);
 		else if (current->next->next == NULL)
 			return (current);

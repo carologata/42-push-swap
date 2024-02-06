@@ -16,7 +16,7 @@ int	binary_tree_search(t_tree_node *root, int data)
 
 void	index_tree_node(t_tree_node **root)
 {
-	static int index = 1;
+	static int	index = 1;
 
 	if ((*root)->left)
 		index_tree_node(&(*root)->left);
