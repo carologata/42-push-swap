@@ -76,4 +76,10 @@ test500: all
 	@echo -n "Instructions: "
 	@./push_swap $(ARG) | wc -l
 
+mytest500: all	
+	$(eval ARG = $(shell shuf -i 0-5000 -n 500))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
 .PHONY: all, clean, fclean, re, libft

@@ -18,13 +18,15 @@ void	read_move(t_stack **a, t_stack **b, t_list **mem)
 	char	buffer[4];
 
 	i = 0;
-	while (read(1, &buffer[i], 1) == 1)
+	while (read(0, &buffer[i], 1) == 1)
 	{
 		if (buffer[i] == '\n')
 		{
 			move(buffer, a, b, mem);
 			i = 0;
 		}
+		else if (buffer[i] == '\0')
+			break ;
 		else
 		{
 			i++;
