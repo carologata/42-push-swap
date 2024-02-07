@@ -55,7 +55,7 @@ t_stack					*ft_stack_penultime(t_stack *stack);
 t_stack					*fill_stack_a(char *argv[], int i, t_list **mem);
 void					fill_with_index(t_stack *a, t_tree_node *root,
 							t_list **mem);
-void					check_if_sorted(t_stack *a);
+void					check_if_sorted(t_stack *a, t_list **mem);
 void					choose_sort(t_stack **a, t_stack **b);
 
 int						find_top_closest_target(t_stack *temp_a,

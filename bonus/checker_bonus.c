@@ -42,24 +42,22 @@ void	check_if_sorted(t_stack *a, t_stack *b, t_list **mem)
 	while (a)
 	{
 		if (a->index != i)
-			message_exit("KO", mem);
+			message_exit("KO\n", mem);
 		a = a->next;
 		i++;
 	}
 	if (b)
-		message_exit("KO", mem);
-	message_exit("OK", mem);
+		message_exit("KO\n", mem);
+	message_exit("OK\n", mem);
 }
 
 char	**deal_with_one_str(int *i, char **argv, t_list **mem)
 {
 	*i = 0;
 	if (*argv[1] == '\0')
-		message_exit("Error", mem);
+		message_exit("Error\n", NULL);
 	argv = ft_split(argv[1], ' ');
 	manage_memory_address(argv, mem, '2');
-	if (argv[1] == NULL)
-		message_exit("Error", mem);
 	return (argv);
 }
 
@@ -76,7 +74,7 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	mem = NULL;
 	if (argc < 2)
-		message_exit("Error", NULL);
+		message_exit("Error\n", NULL);
 	if (argc == 2)
 		argv = deal_with_one_str(&i, argv, &mem);
 	root = build_binary_tree(argv, i, &mem);

@@ -55,5 +55,5 @@ void	move(char *movement, t_stack **a, t_stack **b, t_list **mem)
 	else if (ft_strncmp(movement, "pb\n", 3) == 0)
 		push(a, b);
 	else
-		message_exit("Error", mem);
+		message_exit("Error\n", mem);
 }

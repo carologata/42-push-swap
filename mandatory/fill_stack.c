@@ -34,7 +34,7 @@ void	fill_with_index(t_stack *a, t_tree_node *root, t_list **mem)
 	{
 		a->index = binary_tree_search(root, a->value);
 		if (a->index == -1)
-			message_exit("Error", mem);
+			message_exit(NULL, mem);
 		a = a->next;
 	}
 }

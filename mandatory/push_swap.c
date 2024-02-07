@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	check_if_sorted(t_stack *a)
+void	check_if_sorted(t_stack *a, t_list **mem)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ void	check_if_sorted(t_stack *a)
 		a = a->next;
 		i++;
 	}
-	exit(EXIT_SUCCESS);
+	message_exit(NULL, mem);
 }
 
 void	choose_sort(t_stack **a, t_stack **b)
@@ -44,11 +44,11 @@ char	**deal_with_one_str(int *i, char **argv, t_list **mem)
 {
 	*i = 0;
 	if (*argv[1] == '\0')
-		message_exit("Error", mem);
+		message_exit("Error\n", NULL);
 	argv = ft_split(argv[1], ' ');
 	manage_memory_address(argv, mem, '2');
 	if (argv[1] == NULL)
-		message_exit("Error", mem);
+		message_exit("Error\n", mem);
 	return (argv);
 }
 
@@ -65,13 +65,13 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	mem = NULL;
 	if (argc < 2)
-		message_exit("Error", NULL);
+		message_exit(NULL, NULL);
 	if (argc == 2)
 		argv = deal_with_one_str(&i, argv, &mem);
 	root = build_binary_tree(argv, i, &mem);
 	a = fill_stack_a(argv, i, &mem);
 	fill_with_index(a, root, &mem);
-	check_if_sorted(a);
+	check_if_sorted(a, &mem);
 	choose_sort(&a, &b);
 	if (mem)
 		ft_lstclear(&mem, free);

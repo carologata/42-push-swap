@@ -60,8 +60,14 @@ int	max_abs(int value1, int value2)
 
 void	message_exit(char *message, t_list **mem)
 {
-	ft_printf("%s\n", message);
-	if (*mem)
+	if (message)
+	{
+		if (ft_strncmp(message, "Error\n", 6) == 0)
+			ft_putstr_fd(message, 2);
+		else
+			ft_printf("%s\n", message);
+	}
+	if (mem)
 		ft_lstclear(mem, free);
 	exit(EXIT_FAILURE);
 }

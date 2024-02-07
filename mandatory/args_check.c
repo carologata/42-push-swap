@@ -43,12 +43,12 @@ int	check_arg(t_tree_node *root, char *arg, t_list **mem)
 	i = 1;
 	is_number = check_is_number(arg);
 	if (is_number == -1)
-		message_exit("Error", mem);
+		message_exit("Error\n", mem);
 	number = ft_long_atoi(arg);
 	if (number > 2147483647 || number < -2147483648)
-		message_exit("Error", mem);
+		message_exit("Error\n", mem);
 	if (binary_tree_search(root, number) != -1)
-		message_exit("Error", mem);
+		message_exit("Error\n", mem);
 	return (number);
 	i++;
 }
