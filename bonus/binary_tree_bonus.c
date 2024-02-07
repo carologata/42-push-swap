@@ -41,22 +41,23 @@ void	index_tree_node(t_tree_node **root)
 		index_tree_node(&(*root)->right);
 }
 
-void	add_tree_node(t_tree_node **root, int data)
+void	add_tree_node(t_tree_node **root, int data, t_list **mem)
 {
 	if (*root == NULL)
 	{
 		*root = malloc(sizeof(t_tree_node));
+		manage_memory_address(*root, mem, '1');
 		(*root)->data = data;
 		(*root)->right = NULL;
 		(*root)->left = NULL;
 	}
 	else if (data > (*root)->data)
-		add_tree_node(&(*root)->right, data);
+		add_tree_node(&(*root)->right, data, mem);
 	else if (data < (*root)->data)
-		add_tree_node(&(*root)->left, data);
+		add_tree_node(&(*root)->left, data, mem);
 }
 
-t_tree_node	*build_binary_tree(char *argv[], int i)
+t_tree_node	*build_binary_tree(char *argv[], int i, t_list **mem)
 {
 	int			data;
 	t_tree_node	*root;
@@ -64,8 +65,8 @@ t_tree_node	*build_binary_tree(char *argv[], int i)
 	root = NULL;
 	while (argv[i])
 	{
-		data = check_arg(root, argv[i]);
-		add_tree_node(&root, data);
+		data = check_arg(root, argv[i], mem);
+		add_tree_node(&root, data, mem);
 		i++;
 	}
 	index_tree_node(&root);

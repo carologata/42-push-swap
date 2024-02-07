@@ -36,17 +36,13 @@ typedef struct s_stack
 	struct s_stack		*next;
 }						t_stack;
 
-typedef struct s_addresses
-{
-	void				*address;
-	void				**ptr_address;
-}						t_addresses;
-
 int						check_is_number(char *arg);
-int						check_arg(t_tree_node *root, char *arg);
+int						check_arg(t_tree_node *root, char *arg, t_list **mem);
+char					**deal_with_one_str(int *i, char **argv, t_list **mem);
 
-t_tree_node				*build_binary_tree(char *argv[], int i);
-void					add_tree_node(t_tree_node **root, int data);
+t_tree_node				*build_binary_tree(char *argv[], int i, t_list **mem);
+void					add_tree_node(t_tree_node **root, int data,
+							t_list **_SC_MEMLOCK_RANGE);
 void					index_tree_node(t_tree_node **root);
 int						binary_tree_search(t_tree_node *root, int data);
 
@@ -56,8 +52,9 @@ int						ft_stack_size(t_stack *stack);
 t_stack					*ft_stack_last(t_stack *stack);
 t_stack					*ft_stack_penultime(t_stack *stack);
 
-t_stack					*fill_stack_a(char *argv[], int i);
-void					fill_with_index(t_stack *a, t_tree_node *root);
+t_stack					*fill_stack_a(char *argv[], int i, t_list **mem);
+void					fill_with_index(t_stack *a, t_tree_node *root,
+							t_list **mem);
 void					check_if_sorted(t_stack *a);
 void					choose_sort(t_stack **a, t_stack **b);
 
@@ -109,6 +106,8 @@ void					rrr(t_stack **a, t_stack **b);
 long					ft_long_atoi(const char *nptr);
 int						ft_abs(int value);
 int						max_abs(int value1, int value2);
-void					message_exit(char *message);
+void					manage_memory_address(void *address, t_list **mem,
+							char type);
+void					message_exit(char *message, t_list **mem);
 
 #endif

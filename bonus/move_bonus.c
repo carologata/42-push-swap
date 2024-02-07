@@ -30,7 +30,7 @@ void	rrr(t_stack **a, t_stack **b)
 	reverse_rotate(b);
 }
 
-void	move(char *movement, t_stack **a, t_stack **b)
+void	move(char *movement, t_stack **a, t_stack **b, t_list **mem)
 {
 	if (ft_strncmp(movement, "sa\n", 3) == 0)
 		swap(a);
@@ -55,5 +55,5 @@ void	move(char *movement, t_stack **a, t_stack **b)
 	else if (ft_strncmp(movement, "pb\n", 3) == 0)
 		push(a, b);
 	else
-		message_exit("Error");
+		message_exit("Error", mem);
 }

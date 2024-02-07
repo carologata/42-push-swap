@@ -37,12 +37,14 @@ typedef struct s_stack
 }						t_stack;
 
 int						check_is_number(char *arg);
-int						check_arg(t_tree_node *root, char *arg);
+int						check_arg(t_tree_node *root, char *arg, t_list **mem);
+char					**deal_with_one_str(int *i, char **argv, t_list **mem);
 
 int						binary_tree_search(t_tree_node *root, int data);
 void					index_tree_node(t_tree_node **root);
-void					add_tree_node(t_tree_node **root, int data);
-t_tree_node				*build_binary_tree(char *argv[], int i);
+void					add_tree_node(t_tree_node **root, int data,
+							t_list **mem);
+t_tree_node				*build_binary_tree(char *argv[], int i, t_list **mem);
 
 t_stack					*ft_stack_new(int value);
 void					ft_stack_add_back(t_stack **head, t_stack *new);
@@ -50,15 +52,17 @@ int						ft_stack_size(t_stack *stack);
 t_stack					*ft_stack_last(t_stack *stack);
 t_stack					*ft_stack_penultime(t_stack *stack);
 
-t_stack					*fill_stack_a(char *argv[], int i);
-void					fill_with_index(t_stack *a, t_tree_node *root);
-void					read_move(t_stack **a, t_stack **b);
-void					check_if_sorted(t_stack *a, t_stack *b);
+t_stack					*fill_stack_a(char *argv[], int i, t_list **mem);
+void					fill_with_index(t_stack *a, t_tree_node *root,
+							t_list **mem);
+void					read_move(t_stack **a, t_stack **b, t_list **mem);
+void					check_if_sorted(t_stack *a, t_stack *b, t_list **mem);
 
 void					ss(t_stack **a, t_stack **b);
 void					rr(t_stack **a, t_stack **b);
 void					rrr(t_stack **a, t_stack **b);
-void					move(char *movement, t_stack **a, t_stack **b);
+void					move(char *movement, t_stack **a, t_stack **b,
+							t_list **mem);
 
 void					swap(t_stack **head);
 void					push(t_stack **src, t_stack **dest);
@@ -68,6 +72,8 @@ void					reverse_rotate(t_stack **head);
 long					ft_long_atoi(const char *nptr);
 int						ft_abs(int value);
 int						max_abs(int value1, int value2);
-void					message_exit(char *message);
+void					message_exit(char *message, t_list **mem);
+void					manage_memory_address(void *address, t_list **mem,
+							char type);
 
 #endif

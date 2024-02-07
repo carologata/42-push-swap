@@ -12,33 +12,7 @@
 
 #include "push_swap_bonus.h"
 
-t_stack	*fill_stack_a(char *argv[], int i)
-{
-	t_stack	*a;
-	t_stack	*temp;
-
-	a = NULL;
-	while (argv[i])
-	{
-		temp = ft_stack_new(ft_atoi(argv[i]));
-		ft_stack_add_back(&a, temp);
-		i++;
-	}
-	return (a);
-}
-
-void	fill_with_index(t_stack *a, t_tree_node *root)
-{
-	while (a)
-	{
-		a->index = binary_tree_search(root, a->value);
-		if (a->index == -1)
-			message_exit("Error");
-		a = a->next;
-	}
-}
-
-void	read_move(t_stack **a, t_stack **b)
+void	read_move(t_stack **a, t_stack **b, t_list **mem)
 {
 	int		i;
 	char	buffer[4];
@@ -48,7 +22,7 @@ void	read_move(t_stack **a, t_stack **b)
 	{
 		if (buffer[i] == '\n')
 		{
-			move(buffer, a, b);
+			move(buffer, a, b, mem);
 			i = 0;
 		}
 		else
@@ -58,7 +32,7 @@ void	read_move(t_stack **a, t_stack **b)
 	}
 }
 
-void	check_if_sorted(t_stack *a, t_stack *b)
+void	check_if_sorted(t_stack *a, t_stack *b, t_list **mem)
 {
 	int	i;
 
@@ -66,13 +40,25 @@ void	check_if_sorted(t_stack *a, t_stack *b)
 	while (a)
 	{
 		if (a->index != i)
-			message_exit("KO");
+			message_exit("KO", mem);
 		a = a->next;
 		i++;
 	}
 	if (b)
-		message_exit("KO");
-	message_exit("OK");
+		message_exit("KO", mem);
+	message_exit("OK", mem);
+}
+
+char	**deal_with_one_str(int *i, char **argv, t_list **mem)
+{
+	*i = 0;
+	if (*argv[1] == '\0')
+		message_exit("Error", mem);
+	argv = ft_split(argv[1], ' ');
+	manage_memory_address(argv, mem, '2');
+	if (argv[1] == NULL)
+		message_exit("Error", mem);
+	return (argv);
 }
 
 int	main(int argc, char *argv[])
@@ -81,22 +67,22 @@ int	main(int argc, char *argv[])
 	t_stack		*a;
 	t_stack		*b;
 	t_tree_node	*root;
+	t_list		*mem;
 
+	i = 1;
 	a = NULL;
 	b = NULL;
-	i = 1;
+	mem = NULL;
 	if (argc < 2)
-		message_exit("Error");
+		message_exit("Error", NULL);
 	if (argc == 2)
-	{
-		i = 0;
-		argv = ft_split(argv[1], ' ');
-		if (argv[1] == NULL)
-			message_exit("Error");
-	}
-	root = build_binary_tree(argv, i);
-	a = fill_stack_a(argv, i);
-	fill_with_index(a, root);
-	read_move(&a, &b);
-	check_if_sorted(a, b);
+		argv = deal_with_one_str(&i, argv, &mem);
+	root = build_binary_tree(argv, i, &mem);
+	a = fill_stack_a(argv, i, &mem);
+	fill_with_index(a, root, &mem);
+	read_move(&a, &b, &mem);
+	check_if_sorted(a, b, &mem);
+	if (mem)
+		ft_lstclear(&mem, free);
+	return (0);
 }

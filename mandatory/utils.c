@@ -58,8 +58,36 @@ int	max_abs(int value1, int value2)
 	return (value);
 }
 
-void	message_exit(char *message)
+void	message_exit(char *message, t_list **mem)
 {
 	ft_printf("%s\n", message);
+	if (*mem)
+		ft_lstclear(mem, free);
 	exit(EXIT_FAILURE);
+}
+
+void	manage_memory_address(void *address, t_list **mem, char type)
+{
+	void	**ptr;
+	t_list	*new_node;
+
+	ptr = NULL;
+	new_node = NULL;
+	if (type == '1')
+	{
+		new_node = ft_lstnew(address);
+		ft_lstadd_back(mem, new_node);
+	}
+	else if (type == '2')
+	{
+		ptr = (void **)address;
+		new_node = ft_lstnew(ptr);
+		ft_lstadd_back(mem, new_node);
+		while (*ptr)
+		{
+			new_node = ft_lstnew(*ptr);
+			ft_lstadd_back(mem, new_node);
+			ptr++;
+		}
+	}
 }
