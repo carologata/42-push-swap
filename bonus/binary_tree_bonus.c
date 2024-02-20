@@ -46,8 +46,9 @@ void	add_tree_node(t_tree_node **root, int data, t_list **mem)
 	if (*root == NULL)
 	{
 		*root = malloc(sizeof(t_tree_node));
-		manage_memory_address(*root, mem, '1');
+		garbage_collector(*root, mem, POINTER);
 		(*root)->data = data;
+		(*root)->index = 0;
 		(*root)->right = NULL;
 		(*root)->left = NULL;
 	}

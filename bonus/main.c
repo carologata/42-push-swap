@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 16:25:15 by cogata            #+#    #+#             */
-/*   Updated: 2024/02/06 16:25:17 by cogata           ###   ########.fr       */
+/*   Created: 2024/02/19 12:18:18 by cogata            #+#    #+#             */
+/*   Updated: 2024/02/19 12:18:20 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 void	read_move(t_stack **a, t_stack **b, t_list **mem)
 {
-	int		i;
-	char	buffer[4];
+	char	*line;
 
-	i = 0;
-	while (read(0, &buffer[i], 1) == 1)
+	line = get_next_line(0);
+	if (line)
+		garbage_collector(line, mem, POINTER);
+	while (line != NULL)
 	{
-		if (buffer[i] == '\n')
-		{
-			move(buffer, a, b, mem);
-			i = 0;
-		}
-		else if (buffer[i] == '\0')
-			break ;
-		else
-		{
-			i++;
-		}
+		move(line, a, b, mem);
+		line = get_next_line(0);
+		if (line)
+			garbage_collector(line, mem, POINTER);
 	}
 }
 
@@ -57,7 +51,9 @@ char	**deal_with_one_str(int *i, char **argv, t_list **mem)
 	if (*argv[1] == '\0')
 		message_exit("Error\n", NULL);
 	argv = ft_split(argv[1], ' ');
-	manage_memory_address(argv, mem, '2');
+	if (!argv)
+		message_exit("Error\n", NULL);
+	garbage_collector(argv, mem, POINTER_TO_POINTER);
 	return (argv);
 }
 
@@ -74,7 +70,7 @@ int	main(int argc, char *argv[])
 	b = NULL;
 	mem = NULL;
 	if (argc < 2)
-		message_exit("Error\n", NULL);
+		message_exit(NULL, NULL);
 	if (argc == 2)
 		argv = deal_with_one_str(&i, argv, &mem);
 	root = build_binary_tree(argv, i, &mem);

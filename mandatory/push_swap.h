@@ -17,6 +17,9 @@
 # include <limits.h>
 # include <stdlib.h>
 
+# define POINTER '1'
+# define POINTER_TO_POINTER '2'
+
 typedef struct s_tree_node
 {
 	int					data;
@@ -106,7 +109,7 @@ void					rrr(t_stack **a, t_stack **b);
 long					ft_long_atoi(const char *nptr);
 int						ft_abs(int value);
 int						max_abs(int value1, int value2);
-void					manage_memory_address(void *address, t_list **mem,
+void					garbage_collector(void *address, t_list **mem,
 							char type);
 void					message_exit(char *message, t_list **mem);
 

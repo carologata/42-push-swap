@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 16:21:05 by cogata            #+#    #+#             */
-/*   Updated: 2024/02/06 16:21:14 by cogata           ###   ########.fr       */
+/*   Created: 2024/02/19 12:18:06 by cogata            #+#    #+#             */
+/*   Updated: 2024/02/19 12:18:08 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char	**deal_with_one_str(int *i, char **argv, t_list **mem)
 	if (*argv[1] == '\0')
 		message_exit("Error\n", NULL);
 	argv = ft_split(argv[1], ' ');
-	manage_memory_address(argv, mem, '2');
-	if (argv[1] == NULL)
-		message_exit("Error\n", mem);
+	if (!argv)
+		message_exit("Error\n", NULL);
+	garbage_collector(argv, mem, POINTER_TO_POINTER);
 	return (argv);
 }
 

@@ -21,7 +21,7 @@ t_stack	*fill_stack_a(char *argv[], int i, t_list **mem)
 	while (argv[i])
 	{
 		temp = ft_stack_new(ft_atoi(argv[i]));
-		manage_memory_address(temp, mem, '1');
+		garbage_collector(temp, mem, POINTER);
 		ft_stack_add_back(&a, temp);
 		i++;
 	}

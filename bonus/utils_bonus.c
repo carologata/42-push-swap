@@ -60,19 +60,22 @@ int	max_abs(int value1, int value2)
 
 void	message_exit(char *message, t_list **mem)
 {
+	if (mem)
+		ft_lstclear(mem, free);
 	if (message)
 	{
 		if (ft_strncmp(message, "Error\n", 6) == 0)
+		{
 			ft_putstr_fd(message, 2);
+			exit(EXIT_FAILURE);
+		}
 		else
-			ft_printf("%s\n", message);
+			ft_printf("%s", message);
 	}
-	if (mem)
-		ft_lstclear(mem, free);
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }
 
-void	manage_memory_address(void *address, t_list **mem, char type)
+void	garbage_collector(void *address, t_list **mem, char type)
 {
 	void	**ptr;
 	t_list	*new_node;

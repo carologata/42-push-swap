@@ -30,6 +30,12 @@ void	rrr(t_stack **a, t_stack **b)
 	reverse_rotate(b);
 }
 
+void	incorrect_movement(t_list **mem)
+{
+	get_next_line(-1);
+	message_exit("Error\n", mem);
+}
+
 void	move(char *movement, t_stack **a, t_stack **b, t_list **mem)
 {
 	if (ft_strncmp(movement, "sa\n", 3) == 0)
@@ -55,5 +61,5 @@ void	move(char *movement, t_stack **a, t_stack **b, t_list **mem)
 	else if (ft_strncmp(movement, "pb\n", 3) == 0)
 		push(a, b);
 	else
-		message_exit("Error\n", mem);
+		incorrect_movement(mem);
 }

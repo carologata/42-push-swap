@@ -46,8 +46,9 @@ void	add_tree_node(t_tree_node **root, int data, t_list **mem)
 	if (*root == NULL)
 	{
 		*root = malloc(sizeof(t_tree_node));
-		manage_memory_address(*root, mem, '1');
+		garbage_collector(*root, mem, POINTER);
 		(*root)->data = data;
+		(*root)->index = 0;
 		(*root)->right = NULL;
 		(*root)->left = NULL;
 	}
@@ -62,6 +63,7 @@ t_tree_node	*build_binary_tree(char *argv[], int i, t_list **mem)
 	int			data;
 	t_tree_node	*root;
 
+	data = 0;
 	root = NULL;
 	while (argv[i])
 	{
